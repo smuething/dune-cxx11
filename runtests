@@ -1,10 +1,18 @@
 #!/bin/bash
 
+allpassed=0
 passed=0
+skipped=0
+failed=0
+
+echo
+echo "Running tests..."
+echo
 
 for t in $@ ; do
     if [ ! -x $t ] ; then
-        passed=1
+        allpassed=1
+        skipped=$(( $skipped + 1 ))
         echo "$t...    SKIPPED - executable missing, compilation failure?"
         continue
     fi
@@ -12,8 +20,11 @@ for t in $@ ; do
     ./$t >$outfile 2>&1
     retcode=$?
     if [ $retcode -eq 0 ] ; then
+        passed=$(( $passed + 1 ))
         echo "$t...    passed"
     else
+        allpassed=1
+        failed=$(( $failed + 1 ))
         echo "$t...    FAILED"
         echo "Output of failed test follows"
         cat $outfile
@@ -22,9 +33,13 @@ for t in $@ ; do
 done
 
 if [ $passed -eq 0 ] ; then
-    echo "ALL TESTS PASSED"
+    echo
+    echo "$passed tests passed"
     exit 0
 else
-    echo "SOME TESTS FAILED"
+    echo
+    echo "$passed tests passed"
+    echo "$failed TESTS FAILED"
+    echo "$skipped TESTS SKIPPED"
     exit 1
 fi
