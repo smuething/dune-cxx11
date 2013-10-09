@@ -4,7 +4,10 @@
 
 int foo(std::initializer_list<int> il)
 {
-  return std::accumulate(il.begin(),il.end(),int(0));
+  int res = 0;
+  for (const int* it = il.begin(); it != il.end(); ++it)
+    res += *it;
+  return res;
 }
 
 int main()
