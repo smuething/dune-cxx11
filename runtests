@@ -1,0 +1,30 @@
+#!/bin/bash
+
+passed=0
+
+for t in $@ ; do
+    if [ ! -x $t ] ; then
+        passed=1
+        echo "$t...    SKIPPED - executable missing, compilation failure?"
+        continue
+    fi
+    outfile=$(mktemp out.XXXXXX)
+    ./$t >$outfile 2>&1
+    retcode=$?
+    if [ $retcode -eq 0 ] ; then
+        echo "$t...    passed"
+    else
+        echo "$t...    FAILED"
+        echo "Output of failed test follows"
+        cat $outfile
+    fi
+    rm -f $outfile
+done
+
+if [ $passed -eq 0 ] ; then
+    echo "ALL TESTS PASSED"
+    exit 0
+else
+    echo "SOME TESTS FAILED"
+    exit 1
+fi
