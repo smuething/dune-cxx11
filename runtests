@@ -9,7 +9,7 @@ echo
 echo "Running tests..."
 echo
 
-for t in $@ ; do
+for t in $(echo $@ | tr ' ' '\n' | sort) ; do
     if [ ! -x $t ] ; then
         allpassed=1
         skipped=$(( $skipped + 1 ))
