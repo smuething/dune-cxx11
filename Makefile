@@ -21,6 +21,7 @@ REQUIRED=						\
 	18-decltype					\
 	19-auto						\
 	20-function-templates-default-template-args	\
+	24-move-semantics				\
 
 TARGETS=						\
 	$(REQUIRED)					\
