@@ -22,6 +22,8 @@ REQUIRED=						\
 	19-auto						\
 	20-function-templates-default-template-args	\
 	24-move-semantics				\
+	25-unordered_set				\
+	26-unordered_map				\
 
 TARGETS=						\
 	$(REQUIRED)					\
