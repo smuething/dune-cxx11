@@ -1,0 +1,14 @@
+These tests check your compiler for the level of C++11 compliance required
+by Dune.
+
+Just set CXX to the correct value and run
+
+make clean; make -i check-required
+
+The output will tell you if there were any problems. You can also run
+
+make clean, make -i check
+
+to do some additional checks for features that are not required yet. The
+-i option is important to make sure all tests are being run, even if an early
+test fails.
