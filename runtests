@@ -32,7 +32,7 @@ for t in $@ ; do
     rm -f $outfile
 done
 
-if [ $passed -eq 0 ] ; then
+if [ $allpassed -eq 0 ] ; then
     echo
     echo "$passed tests passed"
     exit 0
